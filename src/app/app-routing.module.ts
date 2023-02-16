@@ -9,27 +9,31 @@ const routes: Routes = [
 	{
 		path: FeaturePaths.LOG_IN,
 		loadChildren: () => import('../pages/login/login.module').then(m => m.LoginModule),
+	},
+	{
+		path: '',
+		children: [
+			{
+				path: FeaturePaths.PRODUCTS,
+				loadChildren: () => import('../pages/products/products.module').then(m => m.ProductsModule),
+			},
+			{
+				path: FeaturePaths.ADD,
+				loadChildren: () => import('../pages/add/add.module').then(m => m.AddModule),
 
-	},
-	{
-		path: FeaturePaths.PRODUCTS,
-		loadChildren: () => import('../pages/products/products.module').then(m => m.ProductsModule),
+			},
+			{
+				path: `${FeaturePaths.EDIT}/:id`,
+				loadChildren: () => import('../pages/edit/edit.module').then(m => m.EditModule),
+			},
+			{
+				path: '**',
+				redirectTo: FeaturePaths.PRODUCTS,
+			},
+		],
 		canActivate: [AuthGuard]
-	},
-	{
-		path: FeaturePaths.ADD,
-		loadChildren: () => import('../pages/add/add.module').then(m => m.AddModule),
-		canActivate: [AuthGuard]
-	},
-	{
-		path: `${FeaturePaths.EDIT}/:id`,
-		loadChildren: () => import('../pages/edit/edit.module').then(m => m.EditModule),
-		canActivate: [AuthGuard]
-	},
-	{
-		path: '**',
-		redirectTo: FeaturePaths.PRODUCTS,
-	},
+	}
+
 ];
 
 @NgModule({
