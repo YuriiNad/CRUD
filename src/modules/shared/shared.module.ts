@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
 
 const components = [
 	HeaderComponent,
 	FooterComponent,
+]
+
+const modules = [
+	ReactiveFormsModule,
+	AppRoutingModule,
+	MaterialModule
 ]
 
 @NgModule({
@@ -13,10 +21,12 @@ const components = [
 		...components,
 	],
 	imports: [
-		CommonModule,
+		...modules,
+
 	],
 	exports: [
 		...components,
+		...modules,
 	]
 })
 export class SharedModule { }

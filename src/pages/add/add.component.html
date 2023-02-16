@@ -1,0 +1,58 @@
+<div class="form-container container flex-row">
+	<form 
+		[formGroup]="addProductForm"
+		(ngSubmit)="addProduct()"
+	>
+
+		<div class="flex-coll">
+			<p class="title">Add your product</p>
+  			<mat-form-field
+				appearance="outline"
+			>
+    			<mat-label>Title</mat-label>
+    			<input 
+					matInput 
+					type="text"
+					[formControl]="controls.title"
+					placeholder="title"
+				>
+    			<mat-error *ngIf="isControlInvalid(controls.title, 'minlength')">Min 10 characters are required</mat-error>
+    			<mat-error *ngIf="isControlInvalid(controls.title, 'required')">Title is required</mat-error>
+  			</mat-form-field>
+
+  			<mat-form-field
+				appearance="outline"
+			>
+    			<mat-label>Description</mat-label>
+    			<input 
+					matInput 
+					type="text"
+					[formControl]="controls.description"
+					placeholder="description"
+				>
+    			<mat-error *ngIf="isControlInvalid(controls.description, 'minlength')">Min 20 characters are required</mat-error>
+    			<mat-error *ngIf="isControlInvalid(controls.description, 'required')">Description is required</mat-error>
+  			</mat-form-field>
+
+  			<mat-form-field
+				appearance="outline"
+			>
+    			<mat-label>category</mat-label>
+    			<input 
+					matInput 
+					type="text"
+					[formControl]="controls.category"
+					placeholder="generator"
+				>
+    			<mat-error *ngIf="isControlInvalid(controls.category, 'required')">Category is required</mat-error>
+  			</mat-form-field>
+
+ 			<button
+				type="submit"
+				color="primary"
+				[disabled]="!isFormValid"
+				mat-raised-button 
+			>Add product</button>	
+		</div>
+	</form>
+</div>

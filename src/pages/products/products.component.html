@@ -1,0 +1,21 @@
+
+<mat-label class="title--big">Products:</mat-label>
+
+<div class="products-container flex-coll">
+	<ng-container 
+		*ngIf="products; else $noProducts"
+>
+		<div class="card-wrapper flex-coll">
+			<app-product-card 
+				*ngFor="let product of products"
+				(onEdit)="logMeth($event)"
+				(onRemove)="logMeth($event)"
+				[product]="product"
+			></app-product-card>
+		</div>
+	</ng-container>
+</div>
+
+<ng-template #$noProducts>
+	<p>No products yet</p>
+</ng-template>

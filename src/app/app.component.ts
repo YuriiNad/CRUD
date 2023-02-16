@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/core/auth.service';
+import { idGenerator } from 'src/helpers';
 
 @Component({
 	selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'crud-app';
+	public year = new Date().getFullYear();
+
+	constructor(public auth: AuthService) {
+		idGenerator()
+	}
+
 }

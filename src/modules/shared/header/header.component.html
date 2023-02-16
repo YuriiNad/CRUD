@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+	<mat-toolbar-row>
+		<a 
+			[disabled]="!isLogged"
+			routerLink = "products" 
+			mat-stroked-button
+		>Products</a>
+		<a 
+			[disabled]="!isLogged"
+			routerLink = "add" 
+			mat-stroked-button
+		>Add</a>
+		<a 
+			[disabled]="!isLogged"
+			routerLink = "edit" 
+			mat-stroked-button
+		>Edit</a>
+		<a 
+			*ngIf="!isLogged"
+			routerLink = "login" 
+			mat-stroked-button
+		>Login</a>
+		<a 
+			*ngIf="isLogged"
+			routerLink = "logout" 
+			mat-stroked-button
+			(click)="onLogout.emit()"
+		>Logout</a>
+		
+
+		<span class="example-spacer"></span>
+		 <mat-icon>favorite</mat-icon>
+	</mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,21 @@
+.flex-row {
+	display: flex;
+}
+
+.flex-coll {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-container {
+	width: fit-content;
+	justify-content: center;
+	align-items: center;
+	
+	.title {
+		text-align: center;
+		font-size: 18px;
+		color: #ffffff99;
+		margin-bottom: 15px;
+	}
+}
