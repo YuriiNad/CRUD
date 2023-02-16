@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from 'src/core/products.service';
 import { idGenerator } from 'src/helpers';
@@ -7,7 +6,7 @@ import { Product } from 'src/models/product.mode';
 
 export type ProductKey = 'title' | 'description' | 'category';
 
-export interface EditProductForm {
+export interface ProductForm {
 	title: FormControl<string>;
 	description: FormControl<string>;
 	category: FormControl<string>;
@@ -19,11 +18,10 @@ export interface EditProductForm {
 	styleUrls: ['./add.component.scss']
 })
 export class AddComponent {
-	public addProductForm!: FormGroup<EditProductForm>;
+	public addProductForm!: FormGroup<ProductForm>;
 
 	constructor(
-		private product: ProductsService,
-		private router: Router,
+		private productService: ProductsService,
 	) { }
 
 	ngOnInit(): void {
@@ -39,7 +37,7 @@ export class AddComponent {
 	}
 
 	public initForm(): void {
-		this.addProductForm = new FormGroup<EditProductForm>({
+		this.addProductForm = new FormGroup<ProductForm>({
 			title: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(10)] }),
 			description: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(20)] }),
 			category: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -54,8 +52,8 @@ export class AddComponent {
 		if (!this.addProductForm.value) return;
 
 		const id = idGenerator();
-		const product = { ...this.addProductForm.value, id }
-		this.product.add(product as Product)
+		const product = { ...this.addProductForm.value, id };
+		this.productService.add(product as Product);
 	}
 
 }

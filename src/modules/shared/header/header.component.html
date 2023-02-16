@@ -11,11 +11,6 @@
 			mat-stroked-button
 		>Add</a>
 		<a 
-			[disabled]="!isLogged"
-			routerLink = "edit" 
-			mat-stroked-button
-		>Edit</a>
-		<a 
 			*ngIf="!isLogged"
 			routerLink = "login" 
 			mat-stroked-button

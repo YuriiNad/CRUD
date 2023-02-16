@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductsService } from 'src/core/products.service';
 import { Product } from 'src/models/product.mode';
 
@@ -10,12 +11,22 @@ import { Product } from 'src/models/product.mode';
 export class ProductsComponent implements OnInit {
 	public products!: Product[];
 
-	constructor(public product: ProductsService) { }
+	constructor(
+		private router: Router,
+		public productsService: ProductsService
+	) { }
+
 	ngOnInit(): void {
-		this.products = this.product.getAll()
+		this.productsService.getAll();
 	}
 
-	logMeth(data: any) {
-		console.log(data)
+	public editProduct(product: Product): void {
+		this.router.navigate([`/edit/${product.id}`]);
 	}
+
+
+	public removeProduct(id: string): void {
+		this.productsService.remove(id);
+	}
+
 }

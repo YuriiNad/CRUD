@@ -3,13 +3,13 @@
 
 <div class="products-container flex-coll">
 	<ng-container 
-		*ngIf="products; else $noProducts"
+		*ngIf="productsService.products?.length; else $noProducts"
 >
 		<div class="card-wrapper flex-coll">
 			<app-product-card 
-				*ngFor="let product of products"
-				(onEdit)="logMeth($event)"
-				(onRemove)="logMeth($event)"
+				*ngFor="let product of productsService.products"
+				(onEdit)="editProduct($event)"
+				(onRemove)="removeProduct(($event).id)"
 				[product]="product"
 			></app-product-card>
 		</div>

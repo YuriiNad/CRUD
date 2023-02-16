@@ -8,6 +8,7 @@ import { Product } from 'src/models/product.mode';
 })
 export class ProductsService {
 	private readonly PREFIX = 'USER_PRODUCTS';
+	public products!: Product[];
 
 	constructor(
 		private api: ApiService,
@@ -15,10 +16,8 @@ export class ProductsService {
 	) { }
 
 	public add(product: Product): void {
-		const currArray = this.getAll() || [];
-
-		if (!!currArray.length) {
-			this.api.set<Product[]>(this.PREFIX, [...currArray, product]);
+		if (this.products) {
+			this.api.set<Product[]>(this.PREFIX, [...this.products, product]);
 			this.router.navigateByUrl('products');
 			return;
 		}
@@ -27,9 +26,27 @@ export class ProductsService {
 		this.router.navigateByUrl('products');
 	}
 
-	public getAll(): Product[] {
-		const products = this.api.get<Product[]>(this.PREFIX);
-		// console.log(products)
-		return products;
+	public update(updatedProduct: Product): void {
+		if (this.products) {
+			const allProductsExceptUpdated = this.products.filter(product => product.id !== updatedProduct.id)
+			this.api.set<Product[]>(this.PREFIX, [...allProductsExceptUpdated, updatedProduct]);
+			this.router.navigateByUrl('products');
+		}
+	}
+
+	public remove(id: string): void {
+		if (id) {
+			const relevantArray = this.products.filter(product => product.id !== id);
+			this.api.set<Product[]>(this.PREFIX, relevantArray);
+			this.getAll();
+		}
+	}
+
+	public getById(id: string): Product | undefined {
+		return this.products?.find(e => e.id === id);
+	}
+
+	public getAll(): void {
+		this.products = this.api.get<Product[]>(this.PREFIX)
 	}
 }

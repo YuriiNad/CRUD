@@ -22,7 +22,7 @@ const routes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{
-		path: FeaturePaths.EDIT,
+		path: `${FeaturePaths.EDIT}/:id`,
 		loadChildren: () => import('../pages/edit/edit.module').then(m => m.EditModule),
 		canActivate: [AuthGuard]
 	},

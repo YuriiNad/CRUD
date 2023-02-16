@@ -7,7 +7,6 @@ export class ApiService {
 	private readonly prefix = 'CRUD_';
 
 	public set<T>(key: string, value: T): void {
-		console.log('ApiService_SET', value)
 		if (!key && !value) return;
 		localStorage.setItem(`${this.prefix}${key}`, JSON.stringify(value));
 	}
