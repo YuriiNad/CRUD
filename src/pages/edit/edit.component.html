@@ -16,7 +16,7 @@
 					[formControl]="controls.title"
 					placeholder="title"
 				>
-    			<mat-error *ngIf="isControlInvalid(controls.title, 'minlength')">Min 10 characters are required</mat-error>
+    			<mat-error *ngIf="isControlInvalid(controls.title, 'whitespace')">Min 10 characters are required (with no spaces)</mat-error>
     			<mat-error *ngIf="isControlInvalid(controls.title, 'required')">Title is required</mat-error>
   			</mat-form-field>
 
@@ -30,7 +30,7 @@
 					[formControl]="controls.description"
 					placeholder="description"
 				>
-    			<mat-error *ngIf="isControlInvalid(controls.description, 'minlength')">Min 20 characters are required</mat-error>
+    			<mat-error *ngIf="isControlInvalid(controls.description, 'whitespace')">Min 20 characters are required (with no spaces)</mat-error>
     			<mat-error *ngIf="isControlInvalid(controls.description, 'required')">Description is required</mat-error>
   			</mat-form-field>
 

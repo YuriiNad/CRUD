@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from 'src/core/products.service';
 import { idGenerator } from 'src/helpers';
 import { Product } from 'src/models/product.mode';
+import { SignsValidators } from 'src/validators/signs.validator';
 
 export type ProductKey = 'title' | 'description' | 'category';
 
@@ -38,8 +39,8 @@ export class AddComponent {
 
 	public initForm(): void {
 		this.addProductForm = new FormGroup<ProductForm>({
-			title: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(10)] }),
-			description: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(20)] }),
+			title: new FormControl('', { nonNullable: true, validators: [Validators.required, SignsValidators.range(10)] }),
+			description: new FormControl('', { nonNullable: true, validators: [Validators.required, SignsValidators.range(20)] }),
 			category: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
 		})
 	}

@@ -4,6 +4,7 @@ import { ProductsService } from 'src/core/products.service';
 import { Product } from 'src/models/product.mode';
 import { ProductForm, ProductKey } from '../add/add.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SignsValidators } from 'src/validators/signs.validator';
 
 @Component({
 	selector: 'app-edit',
@@ -44,8 +45,8 @@ export class EditComponent implements OnInit {
 
 	public initForm(): void {
 		this.editProductForm = new FormGroup<ProductForm>({
-			title: new FormControl(this.product?.title, { nonNullable: true, validators: [Validators.required, Validators.minLength(10)] }),
-			description: new FormControl(this.product?.description, { nonNullable: true, validators: [Validators.required, Validators.minLength(20)] }),
+			title: new FormControl(this.product?.title, { nonNullable: true, validators: [Validators.required, SignsValidators.range(10)] }),
+			description: new FormControl(this.product?.description, { nonNullable: true, validators: [Validators.required, SignsValidators.range(20)] }),
 			category: new FormControl(this.product?.category, { nonNullable: true, validators: [Validators.required] }),
 		})
 	}
